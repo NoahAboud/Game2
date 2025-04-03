@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
     private CharacterController characterController;
     public float speed = 5f;
     public float rotationSpeed = 10f;
-    
+
 
     void Start()
     {
@@ -20,8 +20,8 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        float moveX = Input.GetAxis("Horizontal2");
+        float moveZ = Input.GetAxis("Vertical2");
         Vector3 move = new Vector3(moveX, 0, moveZ);
 
         if (move.magnitude > 1f)
@@ -38,4 +38,3 @@ public class Character : MonoBehaviour
         }
     }
 }
-
