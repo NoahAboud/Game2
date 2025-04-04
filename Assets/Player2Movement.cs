@@ -6,35 +6,35 @@ using UnityEngine;
 
 public class Player2Movement : MonoBehaviour
 {
-    private CharacterController characterController;
+    private Rigidbody rb;
     public float speed = 5f;
     public float rotationSpeed = 10f;
 
-
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked; 
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true; 
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float moveX = Input.GetAxis("Horizontal2");
         float moveZ = Input.GetAxis("Vertical2");
-        Vector3 move = new Vector3(moveX, 0, moveZ);
 
-        if (move.magnitude > 1f)
-        {
-            move.Normalize();
-        }
-
-        characterController.Move(move * Time.deltaTime * speed);
+        Vector3 move = new Vector3(moveX, 0, moveZ).normalized * speed;
 
         if (move.magnitude > 0)
         {
+            rb.velocity = new Vector3(move.x, rb.velocity.y, move.z); 
+
             Quaternion targetRotation = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
     }
 }
