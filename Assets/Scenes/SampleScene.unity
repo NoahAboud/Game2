@@ -1899,6 +1899,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redWinUI: {fileID: 863528369}
   blueWinUI: {fileID: 2053567650}
+  red: {fileID: 1804875861}
+  blue: {fileID: 1775328504}
 --- !u!65 &653295351
 BoxCollider:
   m_ObjectHideFlags: 0
